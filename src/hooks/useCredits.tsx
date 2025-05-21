@@ -1,13 +1,14 @@
 
 import { useAuth } from "./useAuth";
 import { useProfile } from "./useProfile";
-import { useCredits as useCreditsService } from "@/services/profile.service";
+import { useCreditsService } from "@/services/profile.service";
 
 export function useCredits() {
   const { user } = useAuth();
   const { refreshProfile, remainingCredits } = useProfile();
+  const { useCredits: useCreditsService } = useCreditsService();
   
-  const useCredits = async (amount: number = 1) => {
+  const consumeCredits = async (amount: number = 1) => {
     if (!user) return { success: false, remaining: 0 };
     
     // Check if we have enough credits first
@@ -29,7 +30,7 @@ export function useCredits() {
   };
   
   return {
-    useCredits,
+    useCredits: consumeCredits,
     remainingCredits
   };
 }
