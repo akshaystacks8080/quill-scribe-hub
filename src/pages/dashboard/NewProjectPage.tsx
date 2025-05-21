@@ -19,7 +19,7 @@ export function NewProjectPage() {
   const navigate = useNavigate();
   const location = useLocation();
   const { toast } = useToast();
-  const { useCredits } = useCredits();
+  const { useCredits: spendCredits } = useCredits();
 
   // Get passed text from home page if available
   const { text: passedText, rewritten: passedRewritten } = 
@@ -64,7 +64,7 @@ export function NewProjectPage() {
       setProcessing(true);
       
       // Use a credit
-      const result = await useCredits();
+      const result = await spendCredits();
       if (!result.success) {
         toast({
           title: "Failed to use credit",
