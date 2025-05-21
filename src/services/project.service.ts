@@ -1,6 +1,6 @@
 
-import { supabase } from '@/lib/supabase';
-import { Database } from '@/types/supabase';
+import { supabase } from '@/integrations/supabase/client';
+import type { Database } from '@/integrations/supabase/types';
 
 export type Project = Database['public']['Tables']['projects']['Row'];
 export type NewProject = Omit<Database['public']['Tables']['projects']['Insert'], 'id' | 'created_at'>;

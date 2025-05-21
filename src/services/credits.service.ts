@@ -1,5 +1,6 @@
 
 import { supabase } from "@/integrations/supabase/client";
+import type { Database } from "@/integrations/supabase/types";
 
 export const useCreditsService = () => {
   const useCredits = async (userId: string, amount: number = 1) => {
