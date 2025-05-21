@@ -1,11 +1,9 @@
-
 import { Button } from "@/components/ui/button";
 import { Check } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useAuth } from "@/hooks/useAuth";
 import { useProfile } from "@/hooks/useProfile";
 import { useState } from "react";
-import { updateSubscription } from "@/services/profile.service";
 import { useToast } from "@/components/ui/use-toast";
 import { useNavigate } from "react-router-dom";
 
@@ -57,7 +55,7 @@ const tiers = [
 
 export function PricingPage() {
   const { user } = useAuth();
-  const { profile, refreshProfile } = useProfile();
+  const { profile } = useProfile();
   const { toast } = useToast();
   const navigate = useNavigate();
   const [processing, setProcessing] = useState<string | null>(null);
@@ -74,24 +72,21 @@ export function PricingPage() {
       const tier = tiers.find(t => t.id === tierId);
       if (!tier) return;
       
-      // Update subscription (we're mocking this)
-      await updateSubscription(user.id, tierId, tier.credits);
-      
-      // Refresh profile to get updated data
-      await refreshProfile();
-      
-      toast({
-        title: "Subscription updated",
-        description: `You are now subscribed to the ${tier.name} plan`,
+      // Navigate to payment page with tier information
+      navigate("/dashboard/payment", {
+        state: {
+          type: "subscription",
+          planId: tierId,
+          planName: tier.name,
+          price: tier.price,
+          credits: tier.credits
+        }
       });
-
-      // Redirect to dashboard
-      navigate("/dashboard");
     } catch (error) {
-      console.error("Error updating subscription:", error);
+      console.error("Error:", error);
       toast({
         title: "Error",
-        description: "Failed to update subscription. Please try again.",
+        description: "Something went wrong. Please try again.",
         variant: "destructive",
       });
     } finally {

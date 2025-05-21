@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -8,6 +7,7 @@ import { useProfile } from "@/hooks/useProfile";
 import { updateProfile } from "@/services/profile.service";
 import { useAuth } from "@/hooks/useAuth";
 import { useToast } from "@/components/ui/use-toast";
+import { Link } from "react-router-dom";
 
 export function SettingsPage() {
   const { profile, refreshProfile } = useProfile();
@@ -101,10 +101,10 @@ export function SettingsPage() {
             </p>
             <div className="flex flex-col gap-4">
               <Button variant="outline" asChild>
-                <a href="/pricing">Change Plan</a>
+                <Link to="/pricing">Change Plan</Link>
               </Button>
               <Button variant="outline" asChild>
-                <a href="/dashboard/credits">Buy Additional Credits</a>
+                <Link to="/dashboard/credits">Buy Additional Credits</Link>
               </Button>
             </div>
           </CardContent>

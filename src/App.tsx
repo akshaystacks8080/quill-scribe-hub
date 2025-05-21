@@ -21,6 +21,8 @@ import { ProjectsPage } from "./pages/dashboard/ProjectsPage";
 import { NewProjectPage } from "./pages/dashboard/NewProjectPage";
 import { ProjectDetailPage } from "./pages/dashboard/ProjectDetailPage";
 import { SettingsPage } from "./pages/dashboard/SettingsPage";
+import { PaymentPage } from "./pages/dashboard/PaymentPage";
+import { CreditsPage } from "./pages/dashboard/CreditsPage";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -51,6 +53,8 @@ const App = () => (
                 <Route path="/dashboard/projects/new" element={<NewProjectPage />} />
                 <Route path="/dashboard/projects/:id" element={<ProjectDetailPage />} />
                 <Route path="/dashboard/settings" element={<SettingsPage />} />
+                <Route path="/dashboard/payment" element={<PaymentPage />} />
+                <Route path="/dashboard/credits" element={<CreditsPage />} />
               </Route>
 
               {/* Catch all route */}
