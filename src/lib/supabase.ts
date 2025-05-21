@@ -1,19 +1,6 @@
 
-import { createClient } from '@supabase/supabase-js';
-import type { Database } from '@/types/supabase';
+import { supabase } from '@/integrations/supabase/client';
 
-// Get environment variables with fallback empty strings
-const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
-const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
-
-// Ensure we have values before creating the client
-if (!supabaseUrl || !supabaseAnonKey) {
-  console.error(
-    "Supabase URL and Anon Key are required. Please make sure you've set the VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY environment variables."
-  );
-}
-
-export const supabase = createClient<Database>(
-  supabaseUrl || "https://your-project.supabase.co",
-  supabaseAnonKey || "your-anon-key"
-);
+// Re-export the supabase client for backward compatibility
+// This file can be removed in the future if all imports are updated to use the client from integrations
+export { supabase };

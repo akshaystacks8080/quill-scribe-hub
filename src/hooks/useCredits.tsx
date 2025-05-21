@@ -1,12 +1,12 @@
 
 import { useAuth } from "./useAuth";
 import { useProfile } from "./useProfile";
-import { useCreditsService } from "@/services/profile.service";
+import { useCreditsService } from "@/services/credits.service";
 
 export function useCredits() {
   const { user } = useAuth();
   const { refreshProfile, remainingCredits } = useProfile();
-  const { useCredits: useCreditsService } = useCreditsService();
+  const { useCredits: useCreditsFunc } = useCreditsService();
   
   const consumeCredits = async (amount: number = 1) => {
     if (!user) return { success: false, remaining: 0 };
@@ -17,7 +17,7 @@ export function useCredits() {
     }
     
     try {
-      const result = await useCreditsService(user.id, amount);
+      const result = await useCreditsFunc(user.id, amount);
       
       // Refresh the profile to get updated credit count
       await refreshProfile();
